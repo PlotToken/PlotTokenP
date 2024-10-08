@@ -29,7 +29,7 @@
                     <p>Suscribirse a YouTube</p>
                     <span class="reward">+100 PLOT</span>
                 </div>
-                <button class="task-button" onclick="completeTask(this, 100)">Start</button>
+                <button class="task-button" onclick="startTask(this, 100)">Start</button>
             </div>
             <div class="task">
                 <div class="task-icon">
@@ -39,7 +39,7 @@
                     <p>Seguir en Twitter</p>
                     <span class="reward">+100 PLOT</span>
                 </div>
-                <button class="task-button" onclick="completeTask(this, 100)">Start</button>
+                <button class="task-button" onclick="startTask(this, 100)">Start</button>
             </div>
             <div class="task">
                 <div class="task-icon">
@@ -49,7 +49,7 @@
                     <p>Unirse al grupo de Telegram</p>
                     <span class="reward">+100 PLOT</span>
                 </div>
-                <button class="task-button" onclick="completeTask(this, 100)">Start</button>
+                <button class="task-button" onclick="startTask(this, 100)">Start</button>
             </div>
         </div>
 
@@ -64,7 +64,17 @@
                     <p>Invitar a 3 amigos</p>
                     <span class="reward">+100 PLOT</span>
                 </div>
-                <button class="task-button" onclick="completeTask(this, 100)">Start</button>
+                <button class="task-button" onclick="startTask(this, 100)">Start</button>
+            </div>
+            <div class="task">
+                <div class="task-icon">
+                    <img src="https://via.placeholder.com/40" alt="Icono Compartir">
+                </div>
+                <div class="task-details">
+                    <p>Compartir en redes sociales</p>
+                    <span class="reward">+100 PLOT</span>
+                </div>
+                <button class="task-button" onclick="startTask(this, 100)">Start</button>
             </div>
         </div>
 
@@ -79,15 +89,48 @@
                     <p>Ver video promocional</p>
                     <span class="reward">+100 PLOT</span>
                 </div>
-                <button class="task-button" onclick="completeTask(this, 100)">Start</button>
+                <button class="task-button" onclick="startTask(this, 100)">Start</button>
+            </div>
+            <div class="task">
+                <div class="task-icon">
+                    <img src="https://via.placeholder.com/40" alt="Icono Comentario">
+                </div>
+                <div class="task-details">
+                    <p>Dejar un comentario positivo</p>
+                    <span class="reward">+100 PLOT</span>
+                </div>
+                <button class="task-button" onclick="startTask(this, 100)">Start</button>
+            </div>
+            <div class="task">
+                <div class="task-icon">
+                    <img src="https://via.placeholder.com/40" alt="Icono Like">
+                </div>
+                <div class="task-details">
+                    <p>Dar Like en un video</p>
+                    <span class="reward">+100 PLOT</span>
+                </div>
+                <button class="task-button" onclick="startTask(this, 100)">Start</button>
             </div>
         </div>
     </div>
 
     <!-- Sección de amigos -->
     <div class="section" id="amigos" style="display:none;">
-        <h2>Amigos</h2>
-        <p>Aquí podrás ver a tus amigos.</p>
+        <div class="friends-section">
+            <h2>Invite friends and get more PLOT</h2>
+            <img src="https://via.placeholder.com/80" alt="Icono Plot Token" class="friends-logo">
+
+            <!-- Mostrar cuántos amigos se han invitado -->
+            <p class="friends-count" id="friendsCount">0 friends</p>
+
+            <!-- Botón para invitar amigos -->
+            <button class="invite-button" onclick="inviteFriends()">Invite Friends</button>
+
+            <!-- Lista de amigos invitados (dinámica) -->
+            <div class="friends-list" id="friendsList">
+                <!-- Aquí se agregarán los amigos invitados de manera dinámica -->
+            </div>
+        </div>
     </div>
 
     <!-- Sección de ranking -->
@@ -114,40 +157,33 @@
 
     <script>
         // Inicializar contador de tokens
-        let tokens = 0;
-
-        // Función para farmear tokens
-        function farmTokens() {
-            const earned = Math.floor(Math.random() * 10) + 1; // Generar entre 1 y 10 tokens
-            tokens += earned;
-            document.getElementById('plotCount').innerText = `${tokens} PLOT`; // Actualizar el contador de tokens
-            alert(`Has farmeado ${earned} tokens Plot 💩`);
-        }
-
-        // Función para completar la tarea y sumar plots
         let plotCount = 0;
 
-        function completeTask(button, reward) {
-            // Deshabilitar el botón
-            button.disabled = true;
+        // Función para iniciar una tarea
+        function startTask(button, reward) {
+            button.disabled = true; // Deshabilitar el botón para evitar múltiples clics
 
+            // Mostrar animación de "Comprobando"
+            button.innerHTML = '<div class="loading"></div> Comprobando...';
+
+            // Simular tiempo de espera (ej. 3 segundos)
+            setTimeout(() => {
+                // Una vez que se completa la verificación, actualizar el contador y mostrar "Completado"
+                completeTask(button, reward);
+            }, 3000); // 3 segundos
+        }
+
+        // Función para completar la tarea
+        function completeTask(button, reward) {
             // Sumar la recompensa al contador
             plotCount += reward;
-
-            // Crear animación y mostrarla en el texto de plots
-            const rewardText = button.previousElementSibling.querySelector(".reward");
-            const animationText = document.createElement('span');
-            animationText.className = 'gain-animation';
-            animationText.textContent = `+${reward} PLOT`;
-            rewardText.appendChild(animationText);
 
             // Actualizar el contador en pantalla
             document.getElementById("plotCount").textContent = plotCount + " PLOT";
 
-            // Remover la animación después de 1 segundo
-            setTimeout(() => {
-                animationText.remove();
-            }, 1000);
+            // Cambiar el botón por el texto "Completado"
+            button.innerHTML = 'Completado';
+            button.classList.add('completed'); // Agregar clase para estilizar el botón completado
         }
 
         // Función para mostrar solo la sección seleccionada (simula cambio de página)
@@ -161,6 +197,40 @@
             // Mostrar solo la sección seleccionada
             const selectedSection = document.getElementById(sectionId);
             selectedSection.style.display = 'block';
+        }
+
+        // Función para invitar amigos (simulación)
+        function inviteFriends() {
+            alert("Invita a tus amigos compartiendo este bot.");
+        }
+
+        // Función para agregar amigos a la lista de manera dinámica
+        function addFriend(name, earnedPlot) {
+            const friendsList = document.getElementById('friendsList');
+            const friendsCount = document.getElementById('friendsCount');
+            
+            // Crear un nuevo elemento para el amigo
+            const friend = document.createElement('div');
+            friend.classList.add('friend');
+
+            const friendIcon = document.createElement('div');
+            friendIcon.classList.add('friend-icon');
+            friendIcon.textContent = name.charAt(0) + name.charAt(1); // Iniciales
+
+            const friendDetails = document.createElement('div');
+            friendDetails.classList.add('friend-details');
+            friendDetails.innerHTML = `<p>${name}</p><span>+${earnedPlot} PLOT</span>`;
+
+            // Añadir los elementos al contenedor del amigo
+            friend.appendChild(friendIcon);
+            friend.appendChild(friendDetails);
+
+            // Añadir el amigo a la lista
+            friendsList.appendChild(friend);
+
+            // Actualizar el contador de amigos
+            const currentCount = parseInt(friendsCount.textContent);
+            friendsCount.textContent = `${currentCount + 1} friends`;
         }
     </script>
 </body>
