@@ -11,16 +11,54 @@
         <!-- Imagen o logo -->
         <img src="https://via.placeholder.com/80" alt="Logo Plot Token">
         <!-- Contador de plots (empieza en 0) -->
-        <div class="token-count">0 PLOT</div>
+        <div class="token-count" id="plotCount">0 PLOT</div>
     </div>
 
-    <!-- Sección de tareas (añadir tareas que otorgarán plots) -->
+    <!-- Sección de tareas -->
     <div class="tasks-section">
-        <h2>Tareasssss</h2>
-        <p>Completa las tareas a continuación para ganar más plots:</p>
-        <!-- Aquí puedes agregar más tareas -->
-        <p>Tarea 1: <button>Completar</button></p>
-        <p>Tarea 2: <button>Completar</button></p>
+        <h2>Tareas</h2>
+        
+        <!-- Tareas con botones -->
+        <div class="task">
+            <p>Suscribirse a YouTube</p>
+            <button onclick="completeTask(this)">Completar</button>
+        </div>
+        <div class="task">
+            <p>Unirse al canal de Telegram</p>
+            <button onclick="completeTask(this)">Completar</button>
+        </div>
+        <div class="task">
+            <p>Seguir en Twitter</p>
+            <button onclick="completeTask(this)">Completar</button>
+        </div>
+        <div class="task">
+            <p>Dar like en Facebook</p>
+            <button onclick="completeTask(this)">Completar</button>
+        </div>
+        <div class="task">
+            <p>Unirse al Discord</p>
+            <button onclick="completeTask(this)">Completar</button>
+        </div>
+        <div class="task">
+            <p>Seguir en Instagram</p>
+            <button onclick="completeTask(this)">Completar</button>
+        </div>
+        <div class="task">
+            <p>Compartir en redes sociales</p>
+            <button onclick="completeTask(this)">Completar</button>
+        </div>
+        <div class="task">
+            <p>Invitar a 3 amigos</p>
+            <button onclick="completeTask(this)">Completar</button>
+        </div>
+        <div class="task">
+            <p>Ver video promocional</p>
+            <button onclick="completeTask(this)">Completar</button>
+        </div>
+        <div class="task">
+            <p>Dejar un comentario positivo</p>
+            <button onclick="completeTask(this)">Completar</button>
+        </div>
     </div>
 
     <!-- Botones de tareas (barra de navegación inferior) -->
@@ -42,5 +80,21 @@
             <p>Amigos</p>
         </div>
     </div>
+
+    <script>
+        // Función para completar la tarea y sumar 100 plots
+        let plotCount = 0;
+
+        function completeTask(button) {
+            // Deshabilitar el botón
+            button.disabled = true;
+
+            // Sumar 100 plots al contador
+            plotCount += 100;
+
+            // Actualizar el contador en pantalla
+            document.getElementById("plotCount").textContent = plotCount + " PLOT";
+        }
+    </script>
 </body>
 </html>
