@@ -14,86 +14,138 @@
         <div class="token-count" id="plotCount">0 PLOT</div>
     </div>
 
-    <!-- Sección de tareas -->
-    <div class="tasks-section">
+    <!-- Sección de tareas organizada (Home) -->
+    <div class="section" id="home">
         <h2>Tareas</h2>
-        
-        <!-- Tareas con botones -->
-        <div class="task">
-            <p>Suscribirse a YouTube</p>
-            <button onclick="completeTask(this)">Completar</button>
+
+        <!-- Categoría: Seguir redes sociales -->
+        <div class="task-category">
+            <h3>Seguir en redes sociales</h3>
+            <div class="task">
+                <p>Suscribirse a YouTube</p>
+                <span class="reward">+100 PLOT</span>
+                <button onclick="completeTask(this, 100)">Completar</button>
+            </div>
+            <div class="task">
+                <p>Seguir en Twitter</p>
+                <span class="reward">+100 PLOT</span>
+                <button onclick="completeTask(this, 100)">Completar</button>
+            </div>
+            <div class="task">
+                <p>Unirse al grupo de Telegram</p>
+                <span class="reward">+100 PLOT</span>
+                <button onclick="completeTask(this, 100)">Completar</button>
+            </div>
         </div>
-        <div class="task">
-            <p>Unirse al canal de Telegram</p>
-            <button onclick="completeTask(this)">Completar</button>
+
+        <!-- Categoría: Invitar personas -->
+        <div class="task-category">
+            <h3>Invitar personas</h3>
+            <div class="task">
+                <p>Invitar a 3 amigos</p>
+                <span class="reward">+100 PLOT</span>
+                <button onclick="completeTask(this, 100)">Completar</button>
+            </div>
+            <div class="task">
+                <p>Compartir en redes sociales</p>
+                <span class="reward">+100 PLOT</span>
+                <button onclick="completeTask(this, 100)">Completar</button>
+            </div>
         </div>
-        <div class="task">
-            <p>Seguir en Twitter</p>
-            <button onclick="completeTask(this)">Completar</button>
-        </div>
-        <div class="task">
-            <p>Dar like en Facebook</p>
-            <button onclick="completeTask(this)">Completar</button>
-        </div>
-        <div class="task">
-            <p>Unirse al Discord</p>
-            <button onclick="completeTask(this)">Completar</button>
-        </div>
-        <div class="task">
-            <p>Seguir en Instagram</p>
-            <button onclick="completeTask(this)">Completar</button>
-        </div>
-        <div class="task">
-            <p>Compartir en redes sociales</p>
-            <button onclick="completeTask(this)">Completar</button>
-        </div>
-        <div class="task">
-            <p>Invitar a 3 amigos</p>
-            <button onclick="completeTask(this)">Completar</button>
-        </div>
-        <div class="task">
-            <p>Ver video promocional</p>
-            <button onclick="completeTask(this)">Completar</button>
-        </div>
-        <div class="task">
-            <p>Dejar un comentario positivo</p>
-            <button onclick="completeTask(this)">Completar</button>
+
+        <!-- Categoría: Ver videos -->
+        <div class="task-category">
+            <h3>Ver videos</h3>
+            <div class="task">
+                <p>Ver video promocional</p>
+                <span class="reward">+100 PLOT</span>
+                <button onclick="completeTask(this, 100)">Completar</button>
+            </div>
+            <div class="task">
+                <p>Dejar un comentario positivo</p>
+                <span class="reward">+100 PLOT</span>
+                <button onclick="completeTask(this, 100)">Completar</button>
+            </div>
         </div>
     </div>
 
-    <!-- Botones de tareas (barra de navegación inferior) -->
+    <!-- Sección de amigos -->
+    <div class="section" id="amigos" style="display:none;">
+        <h2>Amigos</h2>
+        <p>Aquí podrás ver a tus amigos.</p>
+    </div>
+
+    <!-- Sección de ranking -->
+    <div class="section" id="ranking" style="display:none;">
+        <h2>Ranking</h2>
+        <p>Aquí podrás ver el ranking de jugadores.</p>
+    </div>
+
+    <!-- Botones de navegación (barra inferior) -->
     <div class="tasks">
-        <div class="task-button">
+        <div class="task-button" onclick="showSection('home')">
             <i>🏠</i>
             <p>Home</p>
         </div>
-        <div class="task-button">
-            <i>⚡</i>
-            <p>Colaborar</p>
-        </div>
-        <div class="task-button">
+        <div class="task-button" onclick="showSection('ranking')">
             <i>🏆</i>
             <p>Ranking</p>
         </div>
-        <div class="task-button">
+        <div class="task-button" onclick="showSection('amigos')">
             <i>👥</i>
             <p>Amigos</p>
         </div>
     </div>
 
     <script>
-        // Función para completar la tarea y sumar 100 plots
+        // Inicializar contador de tokens
+        let tokens = 0;
+
+        // Función para farmear tokens
+        function farmTokens() {
+            const earned = Math.floor(Math.random() * 10) + 1; // Generar entre 1 y 10 tokens
+            tokens += earned;
+            document.getElementById('plotCount').innerText = `${tokens} PLOT`; // Actualizar el contador de tokens
+            alert(`Has farmeado ${earned} tokens Plot 💩`);
+        }
+
+        // Función para completar la tarea y sumar plots
         let plotCount = 0;
 
-        function completeTask(button) {
+        function completeTask(button, reward) {
             // Deshabilitar el botón
             button.disabled = true;
 
-            // Sumar 100 plots al contador
-            plotCount += 100;
+            // Sumar la recompensa al contador
+            plotCount += reward;
+
+            // Crear animación y mostrarla en el texto de plots
+            const rewardText = button.previousElementSibling;
+            const animationText = document.createElement('span');
+            animationText.className = 'gain-animation';
+            animationText.textContent = `+${reward} PLOT`;
+            rewardText.appendChild(animationText);
 
             // Actualizar el contador en pantalla
             document.getElementById("plotCount").textContent = plotCount + " PLOT";
+
+            // Remover la animación después de 1 segundo
+            setTimeout(() => {
+                animationText.remove();
+            }, 1000);
+        }
+
+        // Función para mostrar solo la sección seleccionada (simula cambio de página)
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Mostrar solo la sección seleccionada
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.style.display = 'block';
         }
     </script>
 </body>
