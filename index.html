@@ -22,19 +22,34 @@
         <div class="task-category">
             <h3>Seguir en redes sociales</h3>
             <div class="task">
-                <p>Suscribirse a YouTube</p>
-                <span class="reward">+100 PLOT</span>
-                <button onclick="completeTask(this, 100)">Completar</button>
+                <div class="task-icon">
+                    <img src="https://via.placeholder.com/40" alt="Icono YouTube">
+                </div>
+                <div class="task-details">
+                    <p>Suscribirse a YouTube</p>
+                    <span class="reward">+100 PLOT</span>
+                </div>
+                <button class="task-button" onclick="completeTask(this, 100)">Start</button>
             </div>
             <div class="task">
-                <p>Seguir en Twitter</p>
-                <span class="reward">+100 PLOT</span>
-                <button onclick="completeTask(this, 100)">Completar</button>
+                <div class="task-icon">
+                    <img src="https://via.placeholder.com/40" alt="Icono Twitter">
+                </div>
+                <div class="task-details">
+                    <p>Seguir en Twitter</p>
+                    <span class="reward">+100 PLOT</span>
+                </div>
+                <button class="task-button" onclick="completeTask(this, 100)">Start</button>
             </div>
             <div class="task">
-                <p>Unirse al grupo de Telegram</p>
-                <span class="reward">+100 PLOT</span>
-                <button onclick="completeTask(this, 100)">Completar</button>
+                <div class="task-icon">
+                    <img src="https://via.placeholder.com/40" alt="Icono Telegram">
+                </div>
+                <div class="task-details">
+                    <p>Unirse al grupo de Telegram</p>
+                    <span class="reward">+100 PLOT</span>
+                </div>
+                <button class="task-button" onclick="completeTask(this, 100)">Start</button>
             </div>
         </div>
 
@@ -42,14 +57,14 @@
         <div class="task-category">
             <h3>Invitar personas</h3>
             <div class="task">
-                <p>Invitar a 3 amigos</p>
-                <span class="reward">+100 PLOT</span>
-                <button onclick="completeTask(this, 100)">Completar</button>
-            </div>
-            <div class="task">
-                <p>Compartir en redes sociales</p>
-                <span class="reward">+100 PLOT</span>
-                <button onclick="completeTask(this, 100)">Completar</button>
+                <div class="task-icon">
+                    <img src="https://via.placeholder.com/40" alt="Icono Amigos">
+                </div>
+                <div class="task-details">
+                    <p>Invitar a 3 amigos</p>
+                    <span class="reward">+100 PLOT</span>
+                </div>
+                <button class="task-button" onclick="completeTask(this, 100)">Start</button>
             </div>
         </div>
 
@@ -57,14 +72,14 @@
         <div class="task-category">
             <h3>Ver videos</h3>
             <div class="task">
-                <p>Ver video promocional</p>
-                <span class="reward">+100 PLOT</span>
-                <button onclick="completeTask(this, 100)">Completar</button>
-            </div>
-            <div class="task">
-                <p>Dejar un comentario positivo</p>
-                <span class="reward">+100 PLOT</span>
-                <button onclick="completeTask(this, 100)">Completar</button>
+                <div class="task-icon">
+                    <img src="https://via.placeholder.com/40" alt="Icono Video">
+                </div>
+                <div class="task-details">
+                    <p>Ver video promocional</p>
+                    <span class="reward">+100 PLOT</span>
+                </div>
+                <button class="task-button" onclick="completeTask(this, 100)">Start</button>
             </div>
         </div>
     </div>
@@ -82,16 +97,16 @@
     </div>
 
     <!-- Botones de navegación (barra inferior) -->
-    <div class="tasks">
-        <div class="task-button" onclick="showSection('home')">
+    <div class="tasks-bar">
+        <div class="task-button-nav" onclick="showSection('home')">
             <i>🏠</i>
             <p>Home</p>
         </div>
-        <div class="task-button" onclick="showSection('ranking')">
+        <div class="task-button-nav" onclick="showSection('ranking')">
             <i>🏆</i>
             <p>Ranking</p>
         </div>
-        <div class="task-button" onclick="showSection('amigos')">
+        <div class="task-button-nav" onclick="showSection('amigos')">
             <i>👥</i>
             <p>Amigos</p>
         </div>
@@ -120,7 +135,7 @@
             plotCount += reward;
 
             // Crear animación y mostrarla en el texto de plots
-            const rewardText = button.previousElementSibling;
+            const rewardText = button.previousElementSibling.querySelector(".reward");
             const animationText = document.createElement('span');
             animationText.className = 'gain-animation';
             animationText.textContent = `+${reward} PLOT`;
