@@ -9,8 +9,8 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    min-height: 100vh; /* Asegura que la altura mínima sea de 100% de la pantalla */
-    overflow-y: auto; /* Permitir el scroll vertical */
+    min-height: 100vh; /* Altura mínima para que ocupe toda la pantalla */
+    overflow-y: auto; /* Permitir scroll */
 }
 
 /* Contenedor principal */
@@ -50,10 +50,35 @@ img {
     margin-bottom: 15px;
 }
 
-.tasks-section p {
-    color: #bbbbbb;
+.task {
+    background-color: #2d2d2d;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+}
+
+.task button {
+    background-color: #1c62d6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
     font-size: 14px;
-    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.task button:hover {
+    background-color: #15549a;
+}
+
+.task button:disabled {
+    background-color: #444444; /* Botón desactivado */
+    cursor: not-allowed;
 }
 
 /* Sección de barra inferior (tareas) */
@@ -92,24 +117,4 @@ img {
 .task-button i {
     font-size: 22px;
     margin-bottom: 5px;
-}
-
-/* Ajustes para pantallas pequeñas */
-@media (max-width: 375px) {
-    .container {
-        padding: 15px;
-    }
-
-    .token-count {
-        font-size: 24px;
-    }
-
-    .task-button {
-        font-size: 10px;
-        width: 50px;
-    }
-
-    .task-button i {
-        font-size: 18px;
-    }
 }
