@@ -9,14 +9,14 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    min-height: 100vh; /* Altura mínima para que ocupe toda la pantalla */
+    min-height: 100vh; /* Asegura que ocupe toda la pantalla */
     overflow-y: auto; /* Permitir scroll */
+    padding-bottom: 100px; /* Espacio adicional para evitar bloqueo por la barra inferior */
 }
 
 /* Contenedor principal */
 .container {
     margin-top: 20px;
-    padding-bottom: 80px; /* Espacio adicional para la sección de tareas */
 }
 
 /* Imagen o logo central */
@@ -33,10 +33,34 @@ img {
     font-weight: bold;
     color: #cccccc; /* Gris claro para contraste */
     margin-bottom: 20px;
+    position: relative;
 }
 
-/* Sección de tareas (donde agregarás más tarde las tareas que otorgan plots) */
-.tasks-section {
+/* Animación para cuando se complete una tarea */
+.gain-animation {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: #d4af37; /* Dorado oscuro para la animación */
+    animation: gainAnimation 1s ease-in-out forwards;
+}
+
+/* Keyframes para la animación */
+@keyframes gainAnimation {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-30px); /* Mover hacia arriba */
+    }
+}
+
+/* Sección de tareas */
+.section {
     background-color: #1f1f1f;
     padding: 20px;
     border-radius: 10px;
@@ -45,11 +69,22 @@ img {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Sombras suaves */
 }
 
-.tasks-section h2 {
+.section h2 {
     color: #ffffff;
     margin-bottom: 15px;
 }
 
+/* Estilo para categorías de tareas */
+.task-category {
+    margin-bottom: 30px;
+}
+
+.task-category h3 {
+    color: #ffcc00;
+    margin-bottom: 10px;
+}
+
+/* Estilo para las tareas */
 .task {
     background-color: #2d2d2d;
     padding: 15px;
@@ -59,6 +94,19 @@ img {
     justify-content: space-between;
     align-items: center;
     color: #ffffff;
+    position: relative;
+}
+
+.task p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.task .reward {
+    font-size: 12px;
+    color: #000000; /* Texto negro estilizado */
+    margin-right: 10px;
+    font-weight: bold;
 }
 
 .task button {
@@ -93,9 +141,10 @@ img {
     left: 0;
     border-radius: 0;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Asegura que la barra esté por encima del contenido */
 }
 
-/* Botones de tareas (barra de navegación inferior) */
+/* Botones de navegación (barra inferior) */
 .task-button {
     background-color: #2d2d2d;
     color: #ffffff;
@@ -117,4 +166,16 @@ img {
 .task-button i {
     font-size: 22px;
     margin-bottom: 5px;
+}
+
+/* Animaciones para botones */
+@keyframes gainAnimation {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-30px); /* Mover hacia arriba */
+    }
 }
